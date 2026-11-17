@@ -1,10 +1,27 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body { margin: 0; height: 100%; background: #000; color: #eee;
+html { background: #000; }
+html, body { margin: 0; height: 100%; color: #eee;
   font-family: "Segoe UI", system-ui, Arial, sans-serif; overflow: hidden; }
 body { user-select: none; -webkit-user-select: none; }
 .hidden { display: none !important; }
 
-#app { height: 100dvh; display: flex; flex-direction: column; align-items: center;
+/* ---------- Baggrund ---------- */
+#bg { position: fixed; inset: 0; z-index: -1; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 40%, #2a0505 0%, #0a0000 55%, #000 100%); }
+body.flash #bg { display: none; }
+.bombs { position: absolute; inset: -200px; opacity: .5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><g transform='translate(50 70) rotate(-12)'><circle r='26' fill='%23191919' stroke='%23383838' stroke-width='2.5'/><ellipse cx='-9' cy='-11' rx='7' ry='4' fill='%23fff' fill-opacity='.13' transform='rotate(-35 -9 -11)'/><rect x='-7' y='-36' width='14' height='10' rx='2' fill='%23222' stroke='%23383838' stroke-width='2.5'/><path d='M0 -36 Q5 -48 15 -45' fill='none' stroke='%23775533' stroke-width='2.5'/><circle cx='16' cy='-45' r='4' fill='%23ff8800' fill-opacity='.7'/><circle cx='16' cy='-45' r='8' fill='%23ffcc00' fill-opacity='.18'/></g><g transform='translate(150 160) rotate(14) scale(.7)'><circle r='26' fill='%23191919' stroke='%23383838' stroke-width='2.5'/><ellipse cx='-9' cy='-11' rx='7' ry='4' fill='%23fff' fill-opacity='.13' transform='rotate(-35 -9 -11)'/><rect x='-7' y='-36' width='14' height='10' rx='2' fill='%23222' stroke='%23383838' stroke-width='2.5'/><path d='M0 -36 Q5 -48 15 -45' fill='none' stroke='%23775533' stroke-width='2.5'/><circle cx='16' cy='-45' r='4' fill='%23ff8800' fill-opacity='.7'/><circle cx='16' cy='-45' r='8' fill='%23ffcc00' fill-opacity='.18'/></g><text x='140' y='55' font-family='Arial' font-weight='900' font-size='22' fill='%23ff2200' fill-opacity='.14' transform='rotate(10 140 55)'>TIK</text><text x='20' y='175' font-family='Arial' font-weight='900' font-size='18' fill='%23ff2200' fill-opacity='.12' transform='rotate(-8 20 175)'>TAK</text></svg>");
+  background-size: 200px 200px; animation: drift 50s linear infinite; }
+@keyframes drift { to { transform: translate(200px, 200px); } }
+.glow { position: absolute; inset: 0; opacity: 0;
+  background: radial-gradient(ellipse at 50% 45%, rgba(255,0,0,.5), transparent 70%); }
+body.urgent .glow { animation: glowpulse .5s infinite alternate; }
+@keyframes glowpulse { to { opacity: 1; } }
+.hazard { position: absolute; left: 0; right: 0; height: 12px; opacity: .85;
+  background: repeating-linear-gradient(-45deg, #fc0 0 14px, #111 14px 28px); }
+.hazard.top { top: 0; } .hazard.bottom { bottom: 0; }
+
+#app { position: relative; z-index: 1; height: 100dvh; display: flex; flex-direction: column; align-items: center;
   padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom); max-width: 720px; margin: 0 auto; }
 header { display: flex; align-items: center; gap: 14px; padding: 14px 0 6px; }
 h1 { margin: 0; letter-spacing: .3em; font-size: clamp(22px, 6vw, 36px); color: #c33; }

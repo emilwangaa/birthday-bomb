@@ -125,6 +125,7 @@
   /* ---------- Faser ---------- */
   function render() {
     clearRevealTimers();
+    document.body.classList.remove('urgent');
     $('status').textContent = '';
     if (state.phase === 'ready') {
       show('ready');
@@ -238,6 +239,7 @@
     $('clock').textContent = fmt(ms);
     const secs = Math.ceil(ms / 1000);
     $('clock').classList.toggle('urgent', secs <= 60);
+    document.body.classList.toggle('urgent', secs <= 60);
     // beep-nøgle: skifter når et beep skal lyde
     const fast = secs <= 60;
     const key = fast ? Math.floor(ms / 500) : Math.floor(ms / 1000);
