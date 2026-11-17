@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<title>Bombe</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <div id="lamp" class="lamp"></div>
+    <h1 id="title">BOMBE</h1>
+  </header>
+
+  <main>
+    <!-- KLAR -->
+    <section id="screen-ready" class="screen">
+      <p class="hint">Find kodeordet og desarmér bomben, før tiden løber ud!</p>
+      <button id="btn-start" class="big red">START</button>
+    </section>
+
+    <!-- NEDTÆLLING -->
+    <section id="screen-run" class="screen hidden">
+      <div id="clock" class="clock">00:00</div>
+      <div id="status" class="status"></div>
+      <div id="hintLetters" class="letters"></div>
+      <input id="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="KODEORD" maxlength="30">
+      <button id="btn-defuse" class="big green">DESARMÉR</button>
+    </section>
+
+    <!-- AFSLØRING -->
+    <section id="screen-reveal" class="screen hidden">
+      <div id="clockFrozen" class="clock frozen">00:00</div>
+      <div id="revealText" class="reveal-text"></div>
+      <div id="wire" class="wire hidden"></div>
+    </section>
+
+    <!-- BOOM -->
+    <section id="screen-boom" class="screen hidden">
+      <div class="boom">BOOM! 💥</div>
+      <p class="hint">Bomben sprang… men heldigvis var det kun en øvelse!<br>Find en voksen.</p>
+    </section>
+  </main>
+</div>
+
+<!-- PIN -->
+<div id="pin-dialog" class="overlay hidden">
+  <div class="panel">
+    <h2>Voksen-PIN</h2>
+    <input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN">
+    <div class="row">
+      <button id="pin-cancel">Annullér</button>
+      <button id="pin-ok" class="primary">OK</button>
+    </div>
+    <p id="pin-error" class="error"></p>
+  </div>
+</div>
+
+<!-- VOKSEN-MENU -->
+<div id="admin" class="overlay hidden">
+  <div class="panel wide">
+    <h2>Voksen-menu</h2>
+
+    <div class="grid">
+      <label>Tid (minutter)<input id="s-minutes" type="number" min="1" max="180"></label>
+      <label>Straf for forkert kode (sek)<input id="s-penalty" type="number" min="0" max="600"></label>
+      <label>Kodeord<input id="s-code" type="password" autocomplete="off"></label>
+      <label>Ledningsfarve
+        <select id="s-wire">
+          <option>RØDE</option><option>BLÅ</option><option>GRØNNE</option>
+          <option>GULE</option><option>HVIDE</option><option>SORTE</option>
+        </select>
+      </label>
+      <label>Voksen-PIN<input id="s-pin" type="text" inputmode="numeric" maxlength="8"></label>
+      <label class="check"><input id="s-sound" type="checkbox"> Lyd</label>
+      <label class="check"><input id="s-letters" type="checkbox"> Vis antal bogstaver</label>
+    </div>
+
+    <h3>Under spillet</h3>
+    <div class="row wrap">
+      <button id="a-plus1">+1 min</button>
+      <button id="a-plus5">+5 min</button>
+      <button id="a-pause">Pause</button>
+      <button id="a-reset">Nulstil</button>
+    </div>
+
+    <div class="row">
+      <button id="a-close" class="primary">Gem og luk</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
