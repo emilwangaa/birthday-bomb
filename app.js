@@ -220,7 +220,7 @@
       }],
       [4800, () => { text.textContent = 'KLIP DEN…'; sounds.ok(); }],
       [6800, () => {
-        text.textContent = 'Klip over på den…';
+        text.textContent = 'Klip den…';
         wire.textContent = wireName + ' LEDNING!';
         wire.className = 'wire ' + wireName;
         yarn.style.setProperty('--yarn', WIRE_COLORS[wireName] || '#d11');
