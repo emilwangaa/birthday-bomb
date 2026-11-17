@@ -8,8 +8,9 @@ body { user-select: none; -webkit-user-select: none; }
   padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom); max-width: 720px; margin: 0 auto; }
 header { display: flex; align-items: center; gap: 14px; padding: 14px 0 6px; }
 h1 { margin: 0; letter-spacing: .3em; font-size: clamp(22px, 6vw, 36px); color: #c33; }
-.lamp { width: 22px; height: 22px; border-radius: 50%; background: #700; box-shadow: 0 0 10px #f00;
+.lamp { position: relative; width: 22px; height: 22px; border-radius: 50%; background: #700; box-shadow: 0 0 10px #f00;
   animation: blink 1s infinite; }
+.lamp::before { content: ''; position: absolute; inset: -14px; } /* større trykområde */
 @keyframes blink { 50% { opacity: .2; } }
 
 main { flex: 1; width: 100%; display: flex; }
@@ -23,6 +24,9 @@ main { flex: 1; width: 100%; display: flex; }
 .clock.urgent { animation: pulse .5s infinite; }
 .clock.frozen { color: #0f4; text-shadow: 0 0 20px #0f4; border-color: #040; background: #010; }
 @keyframes pulse { 50% { background: #500; } }
+
+.yarn { --yarn: #000; --q: 1; height: clamp(90px, 20vh, 190px); aspect-ratio: 11 / 10; flex-shrink: 0; }
+.yarn.done { --q: 0; animation: pop .6s ease-out; }
 
 .status { min-height: 1.4em; font-size: clamp(18px, 5vw, 26px); color: #fc3; font-weight: 700; }
 .letters { font-family: "Courier New", monospace; font-size: clamp(24px, 7vw, 38px); letter-spacing: .35em; color: #888; }

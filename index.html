@@ -10,6 +10,29 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- Garnnøgle (genbruges via <use>). Farven styres af --yarn, spørgsmålstegnet af --q -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="yarn-clip"><circle cx="100" cy="100" r="80"/></clipPath>
+    <symbol id="yarn-ball" viewBox="0 0 220 200">
+      <circle cx="100" cy="100" r="80" style="fill:var(--yarn,#000)" stroke="#777" stroke-width="3"/>
+      <g clip-path="url(#yarn-clip)" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="5" stroke-linecap="round">
+        <path d="M10 70 Q100 20 190 70"/>
+        <path d="M5 95 Q100 45 195 95"/>
+        <path d="M5 122 Q100 72 195 122"/>
+        <path d="M15 150 Q100 100 185 150"/>
+        <path d="M30 55 Q80 110 50 170"/>
+        <path d="M160 40 Q120 100 150 175"/>
+      </g>
+      <ellipse cx="72" cy="62" rx="22" ry="12" fill="#fff" fill-opacity=".12" transform="rotate(-30 72 62)"/>
+      <path d="M165 150 Q205 165 190 188 Q178 198 205 192" fill="none" style="stroke:var(--yarn,#000)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M165 150 Q205 165 190 188 Q178 198 205 192" fill="none" stroke="#777" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".7"/>
+      <text x="100" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="110"
+            fill="#fff" style="opacity:var(--q,1)">?</text>
+    </symbol>
+  </defs>
+</svg>
+
 <div id="app">
   <header>
     <div id="lamp" class="lamp"></div>
@@ -26,6 +49,7 @@
     <!-- NEDTÆLLING -->
     <section id="screen-run" class="screen hidden">
       <div id="clock" class="clock">00:00</div>
+      <svg class="yarn" role="img" aria-label="Mystisk garnnøgle"><use href="#yarn-ball"/></svg>
       <div id="status" class="status"></div>
       <div id="hintLetters" class="letters"></div>
       <input id="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="KODEORD" maxlength="30">
@@ -35,6 +59,7 @@
     <!-- AFSLØRING -->
     <section id="screen-reveal" class="screen hidden">
       <div id="clockFrozen" class="clock frozen">00:00</div>
+      <svg id="yarnReveal" class="yarn" role="img" aria-label="Garnnøgle"><use href="#yarn-ball"/></svg>
       <div id="revealText" class="reveal-text"></div>
       <div id="wire" class="wire hidden"></div>
     </section>

@@ -10,7 +10,10 @@ Nedtællings-app til skattejagt: børnene samler bogstaver til et kodeord, taste
 5. Løber tiden ud, kommer et venligt BOOM. Giv ekstra tid fra voksen-menuen.
 
 ## Voksen-menu
-Hold fingeren på **titlen "BOMBE"** eller den blinkende lampe i 3 sekunder og indtast PIN (standard `1234`).
+Åbnes med PIN (standard `1234`) på en af tre måder:
+- **Computer:** tryk `F2` (eller `Ctrl+Alt+A`)
+- **Telefon/iPad:** tryk 5 gange hurtigt på den blinkende lampe
+- Eller hold fingeren på **titlen "BOMBE"** eller lampen i 3 sekunder
 
 Her kan I ændre tid, kodeord (standard `KAGE`), ledningsfarve, straf, PIN og lyd, og under spillet give **+1 / +5 min**, pause eller nulstille.
 

@@ -6,13 +6,18 @@
   const KEY_STATE = 'bomb.state.v1';
 
   const DEFAULTS = {
-    minutes: 30,
+    minutes: 2,
     penalty: 30,
     code: 'KAGE',
     wire: 'RØDE',
     pin: '1234',
     sound: true,
     showLetters: true,
+  };
+
+  const WIRE_COLORS = {
+    'RØDE': '#d11', 'BLÅ': '#14d', 'GRØNNE': '#1a3',
+    'GULE': '#ca0', 'HVIDE': '#eee', 'SORTE': '#000',
   };
 
   let settings = Object.assign({}, DEFAULTS, load(KEY_SETTINGS));
@@ -203,6 +208,9 @@
     wire.className = 'wire hidden';
     text.textContent = '';
     const wireName = settings.wire;
+    const yarn = $('yarnReveal');
+    yarn.classList.remove('done');
+    yarn.style.removeProperty('--yarn');
     const steps = [
       [0, () => { text.textContent = 'KODE ACCEPTERET…'; sounds.ok(); }],
       [1800, () => {
@@ -214,6 +222,8 @@
         text.textContent = 'Klip over på den…';
         wire.textContent = wireName + ' LEDNING!';
         wire.className = 'wire ' + wireName;
+        yarn.style.setProperty('--yarn', WIRE_COLORS[wireName] || '#d11');
+        yarn.classList.add('done');
         sounds.fanfare();
       }],
     ];
@@ -251,6 +261,26 @@
     });
     ['pointerup', 'pointerleave', 'pointercancel'].forEach((ev) =>
       el.addEventListener(ev, () => clearTimeout(pressTimer)));
+  });
+
+  // 5 hurtige tryk på lampen (inden for 3 sek) åbner menuen — nemt på touch
+  let taps = [];
+  lamp.addEventListener('pointerdown', () => {
+    const now = Date.now();
+    taps = taps.filter((t) => now - t < 3000);
+    taps.push(now);
+    if (taps.length >= 5) { taps = []; openPin(); }
+  });
+
+  // Tastaturgenvej på computer: F2 eller Ctrl+Alt+A
+  document.addEventListener('keydown', (e) => {
+    const isShortcut = e.key === 'F2' || (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a');
+    if (isShortcut) {
+      e.preventDefault();
+      if ($('pin-dialog').classList.contains('hidden') && $('admin').classList.contains('hidden')) openPin();
+    } else if (e.key === 'Escape') {
+      $('pin-dialog').classList.add('hidden');
+    }
   });
 
   function openPin() {
