@@ -59,7 +59,6 @@
       <div id="clock" class="clock">00:00</div>
       <svg class="yarn" role="img" aria-label="Mystisk garnnøgle"><use href="#yarn-ball"/></svg>
       <div id="status" class="status"></div>
-      <div id="hintLetters" class="letters"></div>
       <input id="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="KODEORD" maxlength="30">
       <button id="btn-defuse" class="big green">DESARMÉR</button>
     </section>
@@ -101,7 +100,7 @@
     <div class="grid">
       <label>Tid (minutter)<input id="s-minutes" type="number" min="1" max="180"></label>
       <label>Straf for forkert kode (sek)<input id="s-penalty" type="number" min="0" max="600"></label>
-      <label>Kodeord<input id="s-code" type="password" autocomplete="off"></label>
+      <label>Kodeord<input id="s-code" type="text" autocomplete="off"></label>
       <label>Ledningsfarve
         <select id="s-wire">
           <option>RØDE</option><option>BLÅ</option><option>GRØNNE</option>
@@ -110,7 +109,6 @@
       </label>
       <label>Voksen-PIN<input id="s-pin" type="text" inputmode="numeric" maxlength="8"></label>
       <label class="check"><input id="s-sound" type="checkbox"> Lyd</label>
-      <label class="check"><input id="s-letters" type="checkbox"> Vis antal bogstaver</label>
     </div>
 
     <h3>Under spillet</h3>

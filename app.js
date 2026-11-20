@@ -12,7 +12,6 @@
     wire: 'RØDE',
     pin: '1234',
     sound: true,
-    showLetters: true,
   };
 
   const WIRE_COLORS = {
@@ -112,16 +111,6 @@
     if (document.visibilityState === 'visible' && state.phase === 'run') keepAwake();
   });
 
-  function renderLetters() {
-    const el = $('hintLetters');
-    if (settings.showLetters) {
-      el.textContent = Array.from(norm(settings.code)).map(() => '_').join(' ');
-      el.classList.remove('hidden');
-    } else {
-      el.classList.add('hidden');
-    }
-  }
-
   /* ---------- Faser ---------- */
   function render() {
     clearRevealTimers();
@@ -131,7 +120,6 @@
       show('ready');
     } else if (state.phase === 'run' || state.phase === 'paused') {
       show('run');
-      renderLetters();
       $('clock').textContent = fmt(remaining());
       $('status').textContent = state.phase === 'paused' ? 'PAUSE' : '';
       $('a-pause').textContent = state.phase === 'paused' ? 'Fortsæt' : 'Pause';
@@ -310,7 +298,6 @@
     $('s-wire').value = settings.wire;
     $('s-pin').value = settings.pin;
     $('s-sound').checked = settings.sound;
-    $('s-letters').checked = settings.showLetters;
     $('a-pause').textContent = state.phase === 'paused' ? 'Fortsæt' : 'Pause';
     $('admin').classList.remove('hidden');
   }
@@ -323,10 +310,8 @@
     settings.wire = $('s-wire').value;
     settings.pin = $('s-pin').value.trim() || DEFAULTS.pin;
     settings.sound = $('s-sound').checked;
-    settings.showLetters = $('s-letters').checked;
     saveSettings();
     $('admin').classList.add('hidden');
-    renderLetters();
     // Nulstillet spil bruger de nye indstillinger ved næste start.
   }
   $('a-close').onclick = closeAdmin;
